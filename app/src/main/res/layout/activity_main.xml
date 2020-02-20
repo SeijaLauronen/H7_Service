@@ -16,14 +16,15 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="#FFEB3B"
-            android:text="Klo Avattiin/suljettiin"
+            android:text="Päiväys (klo): Avattiin/suljettiin"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <ScrollView
             android:id="@+id/ScrollView1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#C5EBF0">
+            android:background="#E6EBF0">
 
 
             <LinearLayout
@@ -35,7 +36,8 @@
                     android:id="@+id/textViewResult"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textStyle="bold" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
