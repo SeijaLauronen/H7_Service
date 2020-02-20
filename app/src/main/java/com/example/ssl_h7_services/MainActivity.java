@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -17,9 +18,10 @@ import java.util.List;
 //Laita entityyn implements serialisable
 
 public class MainActivity extends AppCompatActivity {
+    private String string;
 
 
-  //Date d;   got to implementation, täältä saat selville serialized -onko vai ei ja syntaksin
+    //Date d;   got to implementation, täältä saat selville serialized -onko vai ei ja syntaksin
 
     public class Kuuntelija extends BroadcastReceiver {
 
@@ -108,7 +110,20 @@ public class MainActivity extends AppCompatActivity {
     //Tämä tehty ohjeen mukaiseen eventtiin:
     @Override
     protected void onResume() {
+
+        TextView textViewResult; //tähän ei saanut laittaa private
+        textViewResult=findViewById((R.id.textViewResult));
+        String teksti="";
+
         super.onResume();
+        DBHandler dbHandler = new DBHandler();
+        List<PalveluEntity> tResults = dbHandler.fetchFromDB(getApplicationContext());
+        for (int i =0; i<tResults.size();i++){
+             teksti += tResults.get(i).pvm+": ";
+            teksti += tResults.get(i).teksti+"\n ";
+        }
+
+        textViewResult.setText(teksti);
 
     }
 }
