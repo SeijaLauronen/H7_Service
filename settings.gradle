@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name='SSL_h7_Services'
