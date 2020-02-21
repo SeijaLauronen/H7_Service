@@ -27,13 +27,10 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            //intent.getAction();
         String str =intent.getAction();
-        //if (str == Intent.ACTION_SCREEN_ON)
         String strToDB;
-            //TODO: vertaa equals
+
             if (str.equals(Intent.ACTION_SCREEN_ON)){
-            //if (intent.getAction() == Intent.ACTION_SCREEN_ON){
                 Toast.makeText(context,"Avattiin",Toast.LENGTH_LONG).show();
                 strToDB = "Avattiin";
 
@@ -42,8 +39,11 @@ public class MainActivity extends AppCompatActivity {
                 strToDB = "Suljettiin";
             }
 
+
             PalveluEntity palveluEntity = new PalveluEntity();
             palveluEntity.teksti = strToDB;
+
+            //TODO: Tämä pvm säätö olis järkevämpi tehdä muualla
             Calendar calendar = new GregorianCalendar();
 
             int year       = calendar.get(Calendar.YEAR);
@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
             if (strMonth.length()==1) strMonth ="0"+strMonth; //0 eteen, jos 1-numeroinen kk
             String strDayOfMonth = Integer.toString(dayOfMonth);
             if (strDayOfMonth.length()==1) strDayOfMonth ="0"+strDayOfMonth; //0 eteen, jos 1-numeroinen pv
-            //t.pvm = Integer.toString(dayOfMonth) + "." + Integer.toString(month)+ "." + Integer.toString(year);
             String strHourOfDay = Integer.toString(hourOfDay);
             if (strHourOfDay.length()==1) strHourOfDay ="0"+strHourOfDay; //0 eteen, jos 1-numeroinen kk
             String strMinute =Integer.toString(minute);
@@ -84,21 +83,6 @@ public class MainActivity extends AppCompatActivity {
         intentFilter.addAction(Intent.ACTION_SCREEN_ON);
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
         registerReceiver(kuuntelija,intentFilter);
-
-        /* Yritin laittaa tämän jonnekin muualle kuin tänne OnCreateen, mutta tuo palveluDao ei "toiminut" */
-        /* Hmmmm... */
-
-        PalveluDao palveluDao;
-        Context context = getApplicationContext();
-        DBPalvelu dbPalvelu= DBSingleton.getInstance(context);
-        palveluDao=dbPalvelu.palveluDao();
-        palveluDao.getAllInDescenfingOrder();
-
-        List<PalveluEntity> tResults=palveluDao.getAllInDescenfingOrder();
-        //TODO vaihda kutsumaan DBHandleria
-
-        int i= tResults.size(); //
-
     }
 
     @Override
@@ -107,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         unregisterReceiver(kuuntelija);
     }
 
-    //Tämä tehty ohjeen mukaiseen eventtiin:
+    //Tämä tehty ohjeen mukaiseen eventtiin, en saanut overridettavia esille CRTL + välilyönnillä
     @Override
     protected void onResume() {
 

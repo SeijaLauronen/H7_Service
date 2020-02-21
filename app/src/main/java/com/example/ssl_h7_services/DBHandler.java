@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBHandler {
+    PalveluDao palveluDao;
+
     public void writeToDB(PalveluEntity palveluEntity, Context context){
-        PalveluDao palveluDao;
+        //PalveluDao palveluDao;
         DBPalvelu dbPalvelu= DBSingleton.getInstance(context);
         palveluDao=dbPalvelu.palveluDao();
         palveluDao.InsertTaulu(palveluEntity);
@@ -15,8 +17,7 @@ public class DBHandler {
 
     public List<PalveluEntity> fetchFromDB(Context context){
 
-        //PalveluEntity palveluEntity = new PalveluEntity();
-        PalveluDao palveluDao;
+        //PalveluDao palveluDao;
         DBPalvelu dbPalvelu= DBSingleton.getInstance(context);
         palveluDao=dbPalvelu.palveluDao();
 
